@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "683979841280",
+    "firebase_url": "https://cryptomessenger-895a3.firebaseio.com",
+    "project_id": "cryptomessenger-895a3",
+    "storage_bucket": "cryptomessenger-895a3.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:683979841280:android:d8a9d31fbd60aebb",
+        "android_client_info": {
+          "package_name": "com.dfish.cryptomessenger"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "683979841280-tsd3eg47lpgci0s7j3gk90h0jftk9v6h.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.dfish.cryptomessenger",
+            "certificate_hash": "c52e7a32e348d288b805c3a29b7b9a31e5c2ba41"
+          }
+        },
+        {
+          "client_id": "683979841280-ki9v19jika2t0r49gf4d01u9ljjs05s4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAwXEAndetu_ZH_f35eS7gVx5j1oNlUdG8"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "683979841280-ki9v19jika2t0r49gf4d01u9ljjs05s4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

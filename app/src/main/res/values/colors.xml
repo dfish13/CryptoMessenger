@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+    
+    <!-- CryptoMessengerDark -->
+    <color name="MaastrichtBlue">#0B132B</color>
+    <color name="YankeesBlue">#1C2541</color>
+    <color name="Independence">#3A506B</color>
+    <color name="SeaSerpent">#5BC0BE</color>
+    <color name="AquaMarine">#6FFFE9</color>
+
+    <!-- CryptoRedSplash -->
+    <color name="DarkGunmetal">#202030</color>
+    <color name="StPatricksBlue">#31277C</color>
+    <color name="SlateBlue">#7067CF</color>
+    <color name="PaleCornFlowerBlue">#B7C0EE</color>
+    <color name="CarminePink">#ED474A</color>
+
+</resources>
