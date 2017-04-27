@@ -4,7 +4,9 @@ import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -36,15 +38,16 @@ public class MainActivity extends AppCompatActivity
     private Button bDecrypt;
     private Button bCopy;
 
+    private TextView tKeyId;
+    private TextView tKeyVal;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        key = getIntent().getParcelableExtra("key");
-        if (key == null) {
-            key = new Key(0, TAG);
-        }
+
 
         user = FirebaseAuth.getInstance().getCurrentUser();
         mAuth = FirebaseAuth.getInstance();
@@ -52,6 +55,22 @@ public class MainActivity extends AppCompatActivity
         bEncrypt = (Button) findViewById(R.id.bEncrypt);
         bDecrypt = (Button) findViewById(R.id.bDecrypt);
         bCopy = (Button) findViewById(R.id.bCopy);
+        tKeyId = (TextView) findViewById(R.id.key_id);
+        tKeyVal = (TextView) findViewById(R.id.key_value);
+
+        Bundle bundle = getIntent().getExtras();
+
+        if (bundle == null) {
+            key = new Key(0, TAG, Color.WHITE);
+            tKeyId.setText("default");
+            tKeyVal.setText("");
+        } else {
+            key = bundle.getParcelable(Constants.KEY);
+            tKeyId.setText(key.id.toString());
+            tKeyVal.setText(key.key);
+            tKeyVal.setBackgroundColor(key.color);
+        }
+
 
         bEncrypt.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -166,6 +185,8 @@ public class MainActivity extends AppCompatActivity
             intent = new Intent(getApplicationContext(), LoginActivity.class);
             startActivity(intent);
         } else if (id == R.id.nav_create_key) {
+            intent = new Intent(getApplicationContext(), CreateKeyActivity.class);
+            startActivity(intent);
 
         } else if (id == R.id.nav_send) {
 

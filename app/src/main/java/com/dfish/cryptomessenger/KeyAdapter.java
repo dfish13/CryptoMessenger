@@ -1,6 +1,7 @@
 package com.dfish.cryptomessenger;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,16 +27,17 @@ public class KeyAdapter extends ArrayAdapter<Key> {
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(int pos, View convertView, ViewGroup parent) {
 
         LayoutInflater inflater = (LayoutInflater) context
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
         View rowView = inflater.inflate(R.layout.key_row, parent, false);
+        rowView.setBackgroundColor(keysArrayList.get(pos).color);
         TextView keyIdView = (TextView) rowView.findViewById(R.id.key_id);
         TextView keyValueView = (TextView) rowView.findViewById(R.id.key_value);
-        keyIdView.setText(keysArrayList.get(position).id.toString());
-        keyValueView.setText(keysArrayList.get(position).key);
+        keyIdView.setText(keysArrayList.get(pos).id.toString());
+        keyValueView.setText(keysArrayList.get(pos).key);
 
         return rowView;
     }

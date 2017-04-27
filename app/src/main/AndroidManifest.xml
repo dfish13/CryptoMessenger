@@ -28,6 +28,13 @@
             android:label="@string/title_activity_key_list"
             android:theme="@style/AppTheme.NoActionBar" />
 
+        <provider
+            android:name=".CryptoMessengerProvider"
+            android:authorities="com.dfish.cryptomessenger.provider"
+            android:enabled="true"
+            android:exported="true" />
+
+        <activity android:name=".CreateKeyActivity"></activity>
     </application>
 
 </manifest>
