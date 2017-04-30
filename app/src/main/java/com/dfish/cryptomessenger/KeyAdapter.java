@@ -1,7 +1,6 @@
 package com.dfish.cryptomessenger;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,9 +9,6 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-/**
- * Created by duncanfisher on 4/26/17.
- */
 
 public class KeyAdapter extends ArrayAdapter<Key> {
     private final Context context;

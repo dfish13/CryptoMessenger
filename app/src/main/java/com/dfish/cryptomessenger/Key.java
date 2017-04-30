@@ -3,9 +3,6 @@ package com.dfish.cryptomessenger;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/**
- * Created by duncanfisher on 4/26/17.
- */
 
 public class Key implements Parcelable {
 

@@ -1,10 +1,8 @@
 package com.dfish.cryptomessenger;
 
 import android.content.ContentValues;
-import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -41,13 +39,11 @@ public class CreateKeyActivity extends AppCompatActivity {
             public void onClick(View v) {
                 EditText eRandomKey = (EditText) findViewById(R.id.eRandomKey);
                 ContentValues values = new ContentValues();
-                values.put(CryptoMessengerProvider.COLUMN_KEY_VAL, eRandomKey.getText().toString().trim());
+                values.put(CryptoMessengerProvider.Keys.KEY_VAL, eRandomKey.getText().toString().trim());
 
-                Uri newKeyUri;
-                newKeyUri = getContentResolver().insert(CryptoMessengerProvider.CONTENT_URI, values);
-                Log.i("uri", newKeyUri.toString());
+                getContentResolver().insert(CryptoMessengerProvider.Keys.CONTENT_URI, values);
                 Toast.makeText(CreateKeyActivity.this,
-                        "key added",
+                        R.string.add_key_toast,
                         Toast.LENGTH_LONG).show();
             }
         });
@@ -55,6 +51,6 @@ public class CreateKeyActivity extends AppCompatActivity {
     }
 
     public String getRandomKey() {
-        return Integer.toHexString(random.nextInt());
+        return Long.toHexString(random.nextLong());
     }
 }

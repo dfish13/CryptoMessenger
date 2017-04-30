@@ -6,7 +6,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -37,6 +36,7 @@ public class MainActivity extends AppCompatActivity
     private Button bEncrypt;
     private Button bDecrypt;
     private Button bCopy;
+    private Button bSend;
 
     private TextView tKeyId;
     private TextView tKeyVal;
@@ -48,13 +48,13 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
 
 
-
         user = FirebaseAuth.getInstance().getCurrentUser();
         mAuth = FirebaseAuth.getInstance();
 
         bEncrypt = (Button) findViewById(R.id.bEncrypt);
         bDecrypt = (Button) findViewById(R.id.bDecrypt);
         bCopy = (Button) findViewById(R.id.bCopy);
+        bSend = (Button) findViewById(R.id.bSend);
         tKeyId = (TextView) findViewById(R.id.key_id);
         tKeyVal = (TextView) findViewById(R.id.key_value);
 
@@ -62,8 +62,8 @@ public class MainActivity extends AppCompatActivity
 
         if (bundle == null) {
             key = new Key(0, TAG, Color.WHITE);
-            tKeyId.setText("default");
-            tKeyVal.setText("");
+            tKeyId.setText(R.string.default_key);
+            tKeyVal.setText(R.string.empty);
         } else {
             key = bundle.getParcelable(Constants.KEY);
             tKeyId.setText(key.id.toString());
@@ -76,11 +76,10 @@ public class MainActivity extends AppCompatActivity
             @Override
             public void onClick(View v) {
                 EditText eInput = (EditText) findViewById(R.id.eInput);
-                EditText eOutput = (EditText) findViewById(R.id.eOutput);
                 String input = eInput.getText().toString();
 
                 try {
-                    eOutput.setText(Crypter.encrypt(key.key, input));
+                    eInput.setText(Crypter.encrypt(key.key, input));
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -91,11 +90,10 @@ public class MainActivity extends AppCompatActivity
             @Override
             public void onClick(View v) {
                 EditText eInput = (EditText) findViewById(R.id.eInput);
-                EditText eOutput = (EditText) findViewById(R.id.eOutput);
                 String input = eInput.getText().toString();
 
                 try {
-                    eOutput.setText(Crypter.decrypt(key.key, input));
+                    eInput.setText(Crypter.decrypt(key.key, input));
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -105,14 +103,27 @@ public class MainActivity extends AppCompatActivity
         bCopy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                EditText eOutput = (EditText) findViewById(R.id.eOutput);
+                EditText eInput = (EditText) findViewById(R.id.eInput);
                 ClipboardManager clipboard = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
-                ClipData clip = ClipData.newPlainText("output", eOutput.getText().toString());
+                ClipData clip = ClipData.newPlainText(
+                        getString(R.string.app_name),
+                        eInput.getText().toString());
                 clipboard.setPrimaryClip(clip);
 
                 Toast.makeText(getApplicationContext(),
-                        "output copied!",
-                        Toast.LENGTH_LONG).show();
+                        R.string.copy_toast,
+                        Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        bSend.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                EditText eInput = (EditText) findViewById(R.id.eInput);
+                Intent smsIntent = new Intent(Intent.ACTION_VIEW);
+                smsIntent.setType("vnd.android-dir/mms-sms");
+                smsIntent.putExtra("sms_body", eInput.getText().toString());
+                startActivity(smsIntent);
             }
         });
 
@@ -175,6 +186,8 @@ public class MainActivity extends AppCompatActivity
             startActivity(intent);
 
         } else if (id == R.id.nav_friends) {
+            intent = new Intent(getApplicationContext(), FriendActivity.class);
+            startActivity(intent);
 
         } else if (id == R.id.nav_settings) {
             intent = new Intent(getApplicationContext(), SettingsActivity.class);
@@ -189,7 +202,11 @@ public class MainActivity extends AppCompatActivity
             startActivity(intent);
 
         } else if (id == R.id.nav_send) {
+            intent = new Intent(getApplicationContext(), ConverseActivity.class);
+            startActivity(intent);
 
+        } else if (id == R.id.nav_theme) {
+            startActivity(new Intent(this, ThemeActivity.class));
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -198,7 +215,6 @@ public class MainActivity extends AppCompatActivity
     }
 
     public void displayUserInfo() {
-        // TODO
         // Update nav header with user information
         if (user != null) {
             ((TextView) findViewById(R.id.eUserEmail)).setText(user.getEmail());

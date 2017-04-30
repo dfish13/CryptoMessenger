@@ -31,7 +31,7 @@
             android:layout_marginRight="8dp"
             android:layout_marginStart="8dp"
             android:ems="10"
-            android:hint="Email"
+            android:hint="@string/email_label"
             android:inputType="textEmailAddress"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
@@ -43,30 +43,32 @@
         android:id="@+id/bLogin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Login"
+        android:text="@string/blogin_label"
         android:onClick="clickLogin"
         app:layout_constraintTop_toBottomOf="@+id/textInputLayout2"
         android:layout_marginRight="8dp"
         app:layout_constraintRight_toRightOf="@+id/textInputLayout2"
         android:layout_marginEnd="8dp"
-        android:layout_marginTop="16dp" />
+        android:layout_marginTop="16dp"
+        style="@android:style/Widget.Material.Light.Button.Borderless.Colored"/>
 
     <Button
         android:id="@+id/bCreateUser"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Sign Up"
+        android:text="@string/bsign_up_label"
         app:layout_constraintRight_toLeftOf="@+id/bLogin"
         android:layout_marginRight="16dp"
         app:layout_constraintBaseline_toBaselineOf="@+id/bLogin"
         android:onClick="clickCreateUser"
-        android:layout_marginEnd="16dp" />
+        android:layout_marginEnd="16dp"
+        style="@android:style/Widget.Material.Light.Button.Borderless.Colored"/>
 
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="182dp"
         android:layout_height="121dp"
-        app:srcCompat="@drawable/locks_300px"
+        app:srcCompat="@mipmap/ic_launcher"
         android:layout_marginRight="8dp"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -97,7 +99,7 @@
             android:layout_marginRight="8dp"
             android:layout_marginTop="8dp"
             android:ems="10"
-            android:hint="Password"
+            android:hint="@string/password_label"
             android:inputType="textPassword"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintLeft_toLeftOf="@+id/eEmail"
