@@ -31,7 +31,7 @@ public class FriendFragment extends ListFragment implements
             Telephony.Sms._ID,
             Telephony.Sms.THREAD_ID,
             Telephony.Sms.ADDRESS,
-            Telephony.Sms.BODY
+            Telephony.Sms.BODY,
     };
 
     private final static String[] COLUMNS = {

@@ -23,12 +23,16 @@ import android.widget.Toast;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+import java.nio.charset.Charset;
+
+import javax.crypto.SecretKey;
+
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     final private String TAG = MainActivity.class.getCanonicalName();
-    private Key key;
+    private SecretKey key;
 
     private FirebaseUser user;
     private FirebaseAuth mAuth;
@@ -58,18 +62,13 @@ public class MainActivity extends AppCompatActivity
         tKeyId = (TextView) findViewById(R.id.key_id);
         tKeyVal = (TextView) findViewById(R.id.key_value);
 
-        Bundle bundle = getIntent().getExtras();
 
-        if (bundle == null) {
-            key = new Key(0, TAG, Color.WHITE);
-            tKeyId.setText(R.string.default_key);
-            tKeyVal.setText(R.string.empty);
-        } else {
-            key = bundle.getParcelable(Constants.KEY);
-            tKeyId.setText(key.id.toString());
-            tKeyVal.setText(key.key);
-            tKeyVal.setBackgroundColor(key.color);
-        }
+
+
+        key = Crypter.generateKey();
+        tKeyId.setText(R.string.default_key);
+        tKeyVal.setText(R.string.empty);
+
 
 
         bEncrypt.setOnClickListener(new View.OnClickListener() {
@@ -79,7 +78,8 @@ public class MainActivity extends AppCompatActivity
                 String input = eInput.getText().toString();
 
                 try {
-                    eInput.setText(Crypter.encrypt(key.key, input));
+                    String s = Crypter.encryptWrap(input, key);
+                    eInput.setText(s);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -93,7 +93,8 @@ public class MainActivity extends AppCompatActivity
                 String input = eInput.getText().toString();
 
                 try {
-                    eInput.setText(Crypter.decrypt(key.key, input));
+                    String s = Crypter.decryptWrap(input, key);
+                    eInput.setText(s);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
